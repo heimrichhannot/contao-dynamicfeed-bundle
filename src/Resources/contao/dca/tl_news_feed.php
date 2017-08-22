@@ -16,15 +16,14 @@
 
 $dc = &$GLOBALS['TL_DCA']['tl_news_feed'];
 
-//$dc['__selector__'][] = 'feedGeneration';
-//$dc['subpalettes']['feedGeneration'] = 'sources';
-////$dc['subpalettes']['feedGeneration_xml'] = '';
+$dc['__selector__'][] = 'feedGeneration';
+$dc['subpalettes']['feedGeneration_dynamic'] = 'news_source';
+$dc['subpalettes']['feedGeneration_xml'] = '';
 
 $fields = [
     'feedGeneration' => [
         'label'     => &$GLOBALS['TL_LANG']['tl_news_feed']['feedGeneration'],
         'default'   => \HeimrichHannot\ContaoDynamicFeedBundle\Component\NewsFeedGenerator::FEEDGENERATION_XML,
-        'exclude'   => true,
         'filter'    => true,
         'inputType' => 'select',
         'options'   => [
@@ -33,7 +32,7 @@ $fields = [
         ],
         'eval'      => [
             'tl_class' => 'w50',
-//            'submitOnChange' => true
+            'submitOnChange' => true
         ],
         'sql'       => "varchar(32) NOT NULL default '".\HeimrichHannot\ContaoDynamicFeedBundle\Component\NewsFeedGenerator::FEEDGENERATION_XML."'"
     ],
@@ -42,7 +41,7 @@ $fields = [
         'exclude'          => true,
         'inputType'        => 'select',
         'filter'           => true,
-        'eval'      => ['tl_class' => 'w50'],
+        'eval'             => ['tl_class' => 'w50'],
         'options_callback' => ['hh.dynamicfeed.feed_generator', 'getDcaSourceOptions'],
         'sql'              => "varchar(32) default NULL"
     ]

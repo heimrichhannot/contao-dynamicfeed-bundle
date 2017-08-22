@@ -84,7 +84,7 @@ class NewsFeedController extends Controller
         $this->container->get('contao.framework')->initialize();
 
         $objFeed = \NewsFeedModel::findByIdOrAlias($alias);
-        if (!$objFeed)
+        if (!$objFeed || $objFeed->feedGeneration != 'dynamic')
         {
             throw $this->createNotFoundException('The rss feed you try to access does not exist.');
         }
