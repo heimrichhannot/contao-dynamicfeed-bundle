@@ -9,7 +9,7 @@
  */
 
 
-namespace HeimrichHannot\ContaoNewsAlertBundle\Components;
+namespace HeimrichHannot\ContaoDynamicFeedBundle\Components;
 
 
 use Contao\NewsArchiveModel;
@@ -18,7 +18,7 @@ use HeimrichHannot\Haste\Model\Model;
 use HeimrichHannot\NewsBundle\NewsModel;
 use Model\Collection;
 
-class NewsArchiveTopics implements FeedSourceInterface
+class NewsArchiveFeedSource implements FeedSourceInterface
 {
     /**
      * Returns the alias of the topic source, e.g. category, tag, collection,...
@@ -34,35 +34,6 @@ class NewsArchiveTopics implements FeedSourceInterface
     }
 
     /**
-     * Return all available topics.
-     *
-     * @return array
-     */
-    public static function getTopics()
-    {
-        $objArchives = NewsArchiveModel::findAll();
-        $arrArchives = [];
-        while ($objArchives->next())
-        {
-            $arrArchives[] = $objArchives->title;
-        }
-        return $arrArchives;
-    }
-
-    /**
-     * Returns topics by news item
-     *
-     * @param $objItem \NewsModel
-     *
-     * @return array
-     */
-    public static function getTopicsByItem($objItem)
-    {
-        $strArchive = NewsArchiveModel::findById($objItem->pid)->title;
-        return [$strArchive];
-    }
-
-    /**
      * Return the label for the feed source
      *
      * Example: $GLOBALS['TL_LANG']['tl_news_feed']['source_tag']
@@ -71,7 +42,7 @@ class NewsArchiveTopics implements FeedSourceInterface
      */
     public function getLabel()
     {
-        // TODO: Implement getLabel() method.
+        return \System::getContainer()->get('translator')->trans('hh.dynamicfeed.feedsource.newsarchive.label');
     }
 
     /**
@@ -87,7 +58,8 @@ class NewsArchiveTopics implements FeedSourceInterface
      */
     public function getChannel($varChannel)
     {
-        // TODO: Implement getChannel() method.
+        $objArchive = NewsArchiveModel::findByIdOrAlias($varChannel);
+        return $objArchive;
     }
 
     /**
@@ -99,20 +71,26 @@ class NewsArchiveTopics implements FeedSourceInterface
      */
     public static function getChannels()
     {
-        // TODO: Implement getChannels() method.
+        $objArchives = NewsArchiveModel::findAll();
+        return $objArchives;
     }
 
     /**
      * Return news belonging to the channel
      *
-     * @param Collection|Model $channel
+     * @param NewsArchiveModel $objChannel
      * @param integer          $maxItems Max items to return. 0 = all items
      *
      * @return Collection|Model|NewsModel[]|NewsModel|null
      */
     public static function getItemsByChannel($objChannel, $maxItems = 0)
     {
-        // TODO: Implement getItemsByChannel() method.
+        if (is_int($maxItems) && $maxItems > 0)
+        {
+            $opt['limit'] = $maxItems;
+        }
+        $objNews = NewsModel::findByPid($objChannel->id);
+        return $objNews;
     }
 
     /**
@@ -120,12 +98,12 @@ class NewsArchiveTopics implements FeedSourceInterface
      *
      * Return null, if channel not exist.
      *
-     * @param Model $objChannel
+     * @param NewsArchiveModel $objChannel
      *
      * @return string|null
      */
     public static function getChannelTitle($objChannel)
     {
-        // TODO: Implement getChannelTitle() method.
+        return $objChannel ? $objChannel->title : null;
     }
 }

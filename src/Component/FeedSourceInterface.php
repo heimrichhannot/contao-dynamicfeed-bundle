@@ -61,7 +61,7 @@ interface FeedSourceInterface
     /**
      * Return news belonging to the channel
      *
-     * @param Collection|Model $channel
+     * @param Collection|Model $objChannel
      * @param integer $maxItems Max items to return. 0 = all items
      *
      * @return Collection|Model|NewsModel[]|NewsModel|null

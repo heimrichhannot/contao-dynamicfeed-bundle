@@ -1,0 +1,5 @@
+# News Feed Source
+hh.dynamicfeed:
+    feedsource:
+        newsarchive:
+            label: Archiv
