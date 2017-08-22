@@ -2,3 +2,7 @@ services:
 #hh.news-bundle.news_feed_generator:
     hh.dynamicfeed.feed_generator:
         class: HeimrichHannot\ContaoDynamicFeedBundle\Component\NewsFeedGenerator
+
+    hh.dynamicfeed.source.newsarchive:
+        class: HeimrichHannot\ContaoDynamicFeedBundle\Components\NewsArchiveFeedSource
+        tags: [hh.dynamicfeed.feed_source]

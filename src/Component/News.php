@@ -55,15 +55,6 @@ class News extends \Contao\News
             $arrUrls = [];
             while ($objArticle->next())
             {
-                $strNewsSource = $arrFeed['news_source'];
-                if ($objArticle->$strNewsSource === null)
-                {
-                    continue;
-                }
-                if (empty(deserialize($objArticle->$strNewsSource)))
-                {
-                    continue;
-                }
                 $jumpTo = $objArticle->getRelated('pid')->jumpTo;
                 // No jumpTo page set (see #4784)
                 if (!$jumpTo)
