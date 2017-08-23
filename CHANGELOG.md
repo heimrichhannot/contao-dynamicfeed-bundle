@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.1-dev] - 2017-08-23
+## [1.0.1] - 2017-08-23
 
 ### Changed
 * updated FeedSourceInterface annotations
