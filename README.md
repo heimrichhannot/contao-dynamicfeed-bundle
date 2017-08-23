@@ -2,9 +2,6 @@
 
 Generates an dynamic feed for your news articles.
 
-## Features
-* dynamic rss feed generation
-
 ## Requires
 * Contao 4.4
 * PHP7
@@ -17,7 +14,7 @@ The dynamic rss feed is based on feed sources and their channels. Feed sources c
 
 #### Register a feed source
 1. Your class must implement `FeedSourceInterface`
-2. Create a service for your class and add the `news-bundle.feed_source` tag.
+2. Create a service for your class and add the `hh.dynamicfeed.feed_source` tag.
 3. Create a new feed in the Contao-Backend (News -> Create Feed), select dynamic feed and the corresponding feed source.
 
 ```
@@ -25,7 +22,7 @@ The dynamic rss feed is based on feed sources and their channels. Feed sources c
 // services.yml
 
 HeimrichHannot\CustomBundle\FeedSources\TagFeedSource:
-        tags: [news-bundle.feed_source]
+        tags: [hh.dynamicfeed.feed_source]
 ```
 
 The bundle will then add following routes for your feed source:
