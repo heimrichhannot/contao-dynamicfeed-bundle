@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.1-dev] - 2017-08-23
+
+### Changed
+* updated FeedSourceInterface annotations
+* updated NewsModel annotations
+
 ## [1.0.0] - 2017-08-23
 
 ###Added

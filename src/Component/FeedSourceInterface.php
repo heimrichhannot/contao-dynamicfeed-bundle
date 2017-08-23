@@ -8,12 +8,6 @@
 
 namespace HeimrichHannot\ContaoDynamicFeedBundle\Component;
 
-
-use HeimrichHannot\Haste\Model\Model;
-//TODO
-use HeimrichHannot\NewsBundle\NewsModel;
-use Model\Collection;
-
 interface FeedSourceInterface
 {
     /**
@@ -45,7 +39,7 @@ interface FeedSourceInterface
      *
      * @param string|integer $channel identifier or unique alias of the channel
      *
-     * @return Collection|Model|null
+     * @return \Contao\Model|null
      */
     public function getChannel($varChannel);
 
@@ -54,7 +48,7 @@ interface FeedSourceInterface
      *
      * Channels: see getChannel() doc
      *
-     * @return Collection|Model|null
+     * @return \Contao\Model\Collection|\Contao\Model|null
      */
     public static function getChannels();
 
@@ -64,7 +58,7 @@ interface FeedSourceInterface
      * @param Collection|Model $objChannel
      * @param integer $maxItems Max items to return. 0 = all items
      *
-     * @return Collection|Model|NewsModel[]|NewsModel|null
+     * @return \Contao\Model\Collection|\Contao\NewsModel[]|\Contao\NewsModel|null
      */
     public static function getItemsByChannel($objChannel, $maxItems = 0);
 

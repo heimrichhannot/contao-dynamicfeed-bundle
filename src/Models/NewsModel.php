@@ -27,7 +27,7 @@ class NewsModel extends \Contao\NewsModel
      * @param int        $intOffset
      * @param array      $arrOptions
      *
-     * @return NewsModel|NewsModel[]|\Model\Collection|null
+     * @return \Contao\Model\Collection|NewsModel[]|NewsModel|null
      */
     public static function findPublishedByNewsSource($strSource, $varId = 0, $intLimit = 0, $intOffset = 0, $arrOptions)
     {
@@ -81,6 +81,14 @@ class NewsModel extends \Contao\NewsModel
         return static::findPublished($arrColumns, $intLimit, $intOffset, $arrOptions);
     }
 
+    /**
+     * @param       $arrColumns
+     * @param int   $intLimit
+     * @param int   $intOffset
+     * @param array $arrOptions
+     *
+     * @return \Contao\Model\Collection|NewsModel|NewsModel[]|null
+     */
     private static function findPublished($arrColumns, $intLimit = 0, $intOffset = 0, array $arrOptions = [])
     {
         $t = static::$strTable;
