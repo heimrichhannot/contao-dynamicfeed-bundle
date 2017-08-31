@@ -27,4 +27,5 @@ HeimrichHannot\CustomBundle\FeedSources\TagFeedSource:
 
 The bundle will then add following routes for your feed source:
 * `/share/[feedAlias|feedId]`
-* `/share/[feddAlias|feedId]/[channelId|channelAlias]`
+* `/share/[feedAlias|feedId]/[channelId|channelAlias]`
+* `/share/[feedAlias|feedId]/source_channels` (list of available channels)
