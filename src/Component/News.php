@@ -42,11 +42,24 @@ class News extends \Contao\News
         // Get the items
         if ($arrFeed['maxItems'] > 0)
         {
-            $objArticle = NewsModel::findPublishedByNewsSource($arrFeed['news_source'], $varId, $arrFeed['maxItems'], 0, ['news_source' => $arrFeed['news_source']]);
+            $objArticle = NewsModel::findPublishedByNewsSource(
+                $arrFeed['news_source'],
+                $varId,
+                $arrArchives,
+                $arrFeed['maxItems'],
+                0, ['news_source' => $arrFeed['news_source']]
+            );
         }
         else
         {
-            $objArticle = NewsModel::findPublishedByNewsSource($arrFeed['news_source'], $varId, 0, 0, ['news_source' => $arrFeed['news_source']]);
+            $objArticle = NewsModel::findPublishedByNewsSource(
+                $arrFeed['news_source'],
+                $varId,
+                $arrArchives,
+                0,
+                0,
+                ['news_source' => $arrFeed['news_source']]
+            );
         }
 
         // Parse the items

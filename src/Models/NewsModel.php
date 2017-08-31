@@ -23,13 +23,14 @@ class NewsModel extends \Contao\NewsModel
     /**
      * @param string     $strSource News source
      * @param int|string $varId     Id or unique alias of news channel. 0 for all channels of type
+     * @param array      $arrPids   Archive Ids
      * @param int        $intLimit
      * @param int        $intOffset
      * @param array      $arrOptions
      *
      * @return \Contao\Model\Collection|NewsModel[]|NewsModel|null
      */
-    public static function findPublishedByNewsSource($strSource, $varId = 0, $intLimit = 0, $intOffset = 0, $arrOptions)
+    public static function findPublishedByNewsSource($strSource, $varId = 0, $arrPids, $intLimit = 0, $intOffset = 0, $arrOptions)
     {
         if (!is_string($strSource) && empty($strSource))
         {
@@ -77,6 +78,7 @@ class NewsModel extends \Contao\NewsModel
             }
         }
         $arrColumns[] = "$t.id IN (" . implode(',', (empty($arrNewsIds) ? [] : array_unique($arrNewsIds))) . ")";
+        $arrColumns = ["$t.pid IN(".implode(',', array_map('intval', $arrPids)).")"];
 
         return static::findPublished($arrColumns, $intLimit, $intOffset, $arrOptions);
     }
