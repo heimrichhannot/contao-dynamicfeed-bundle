@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.3] - 2017-09-01
+
+### Fixed
+* entity not defined xml error
+* variable name spelling mistakes
+
 ## [1.0.2] - 2017-08-31
 
 ### Fixed

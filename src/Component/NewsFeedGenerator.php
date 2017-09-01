@@ -90,8 +90,8 @@ class NewsFeedGenerator
 
         $news = new News();
         $objFeed = $news->generateDynamicFeed($arrFeed, $varId);
-        $strFeed = $objFeed->generateRss();
-        return $strFeed;
+        $strFeed =   $objFeed->generateRss();
+        return \StringUtil::decodeEntities($strFeed);
     }
 
     /**

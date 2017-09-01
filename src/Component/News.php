@@ -154,7 +154,6 @@ class News extends \Contao\News
                 $objFeed->addItem($objItem);
             }
         }
-
         return $objFeed;
     }
 

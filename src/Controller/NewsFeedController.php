@@ -121,14 +121,14 @@ class NewsFeedController extends Controller
             $id = intval($id);
         }
         /**
-         * @var NewsFeedGenerator $objNewsGeneratior
+         * @var NewsFeedGenerator $objNewsGenerator
          */
-        $objNewsGeneratior = $this->container->get('hh.dynamicfeed.feed_generator');
+        $objNewsGenerator = $this->container->get('hh.dynamicfeed.feed_generator');
         if (is_numeric($count))
         {
-            $objNewsGeneratior->setMaxItems(intval($count));
+            $objNewsGenerator->setMaxItems(intval($count));
         }
-        $strFeed = $objNewsGeneratior->generateFeed($objFeed->row(), $id);
+        $strFeed = $objNewsGenerator->generateFeed($objFeed->row(), $id);
         return new Response($strFeed);
     }
 }
