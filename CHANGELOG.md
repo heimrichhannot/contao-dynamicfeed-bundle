@@ -2,10 +2,10 @@
 
 ## [1.1.0] - 2017-09-04
 
-## Added
+### Added
 * Hook `dynamicfeedBeforeGeneration`
 
-## Changed 
+### Changed 
 * renamed database tables
 * default value for link tag is now Enviroment::get('url') instead of Enviroment::get('base') (corresponding with RSS standard). This value is overwritten by the base url value that can set in feed setting and with the newly introduced hook
 
