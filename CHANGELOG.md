@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.2] - 2017-09-04 
+
+### Changed
+* renamed `HeimrichHannot\NewsBundle\NewsModel` to `HeimrichHannot\NewsBundle\Model\NewsModel`
+
 ## [1.1.1] - 2017-09-04
 
 ### Fixed

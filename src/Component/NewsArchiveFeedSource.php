@@ -15,7 +15,7 @@ namespace HeimrichHannot\ContaoDynamicFeedBundle\Components;
 use Contao\NewsArchiveModel;
 use HeimrichHannot\ContaoDynamicFeedBundle\Component\FeedSourceInterface;
 use HeimrichHannot\Haste\Model\Model;
-use HeimrichHannot\NewsBundle\NewsModel;
+use HeimrichHannot\NewsBundle\Model\NewsModel;
 use Model\Collection;
 
 class NewsArchiveFeedSource implements FeedSourceInterface
