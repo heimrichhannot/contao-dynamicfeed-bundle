@@ -10,6 +10,9 @@
 
 namespace HeimrichHannot\ContaoDynamicFeedBundle\Component;
 
+use Contao\System;
+use function GuzzleHttp\Promise\queue;
+
 class NewsFeedGenerator
 {
     const FEEDGENERATION_DYNAMIC = 'dynamic';
@@ -67,6 +70,7 @@ class NewsFeedGenerator
      */
     public function generateFeed($arrFeed, $varId=0)
     {
+        $objChannel = null;
         if ($varId !== 0)
         {
             $objSource = static::getFeedSource($arrFeed['news_source']);
@@ -90,6 +94,14 @@ class NewsFeedGenerator
 
         $news = new News();
         $objFeed = $news->generateDynamicFeed($arrFeed, $varId);
+        if (isset($GLOBALS['TL_HOOKS']['dynamicfeedBeforeGeneration'])
+            && is_array($GLOBALS['TL_HOOKS']['dynamicfeedBeforeGeneration']))
+        {
+            foreach ($GLOBALS['TL_HOOKS']['dynamicfeedBeforeGeneration'] as $callback)
+            {
+                $objFeed = System::importStatic($callback[0])->{$callback[1]}($objFeed, $arrFeed, $objChannel);
+            }
+        }
         $strFeed =   $objFeed->generateRss();
         return \StringUtil::decodeEntities($strFeed);
     }

@@ -29,7 +29,7 @@ class News extends \Contao\News
             return null;
         }
         $strType = ($arrFeed['format'] == 'atom') ? 'generateAtom' : 'generateRss';
-        $strLink = $arrFeed['feedBase'] ?: \Environment::get('base');
+        $strLink = $arrFeed['feedBase'] ?: \Environment::get('url');
         $strFile = $arrFeed['feedName'];
 
         $objFeed              = new \Feed($strFile);
