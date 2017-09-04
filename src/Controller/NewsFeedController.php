@@ -49,7 +49,7 @@ class NewsFeedController extends Controller
         /**
          * @var FeedSourceInterface $objSource
          */
-        $objSource = $this->container->get('hh.dynamicfeed.feed_generator')->getFeedSource($objFeed->news_source);
+        $objSource = $this->container->get('hh.dynamicfeed.feed_generator')->getFeedSource($objFeed->df_newsSource);
         $objChannels = $objSource->getChannels();
         $arrChannels = [];
         while ($objChannels->next())
@@ -84,7 +84,7 @@ class NewsFeedController extends Controller
         $this->container->get('contao.framework')->initialize();
 
         $objFeed = \NewsFeedModel::findByIdOrAlias($alias);
-        if (!$objFeed || $objFeed->feedGeneration != 'dynamic')
+        if (!$objFeed || $objFeed->df_feedType != 'dynamic')
         {
             throw $this->createNotFoundException('The rss feed you try to access does not exist.');
         }

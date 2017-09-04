@@ -77,9 +77,9 @@ class NewsModel extends \Contao\NewsModel
                 }
             }
         }
-        $arrColumns[] = "$t.id IN (" . implode(',', (empty($arrNewsIds) ? [] : array_unique($arrNewsIds))) . ")";
-        $arrColumns = ["$t.pid IN(".implode(',', array_map('intval', $arrPids)).")"];
 
+        $arrColumns = ["$t.pid IN(".implode(',', array_map('intval', $arrPids)).")"];
+        $arrColumns[] = "$t.id IN (" . implode(',', (empty($arrNewsIds) ? [] : array_unique($arrNewsIds))) . ")";
         return static::findPublished($arrColumns, $intLimit, $intOffset, $arrOptions);
     }
 

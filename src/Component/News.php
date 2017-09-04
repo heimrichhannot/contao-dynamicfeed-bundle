@@ -39,28 +39,20 @@ class News extends \Contao\News
         $objFeed->language    = $arrFeed['language'];
         $objFeed->published   = $arrFeed['tstamp'];
 
-        // Get the items
-        if ($arrFeed['maxItems'] > 0)
+        if (!$arrFeed['maxItems'] > 0)
         {
-            $objArticle = NewsModel::findPublishedByNewsSource(
-                $arrFeed['news_source'],
-                $varId,
-                $arrArchives,
-                $arrFeed['maxItems'],
-                0, ['news_source' => $arrFeed['news_source']]
-            );
+            $arrFeed['maxItems'] = 0;
         }
-        else
-        {
-            $objArticle = NewsModel::findPublishedByNewsSource(
-                $arrFeed['news_source'],
-                $varId,
-                $arrArchives,
-                0,
-                0,
-                ['news_source' => $arrFeed['news_source']]
-            );
-        }
+
+        $objArticle = NewsModel::findPublishedByNewsSource(
+            $arrFeed['df_newsSource'],
+            $varId,
+            $arrArchives,
+            $arrFeed['maxItems'],
+            0,
+            ['df_newsSource' => $arrFeed['df_newsSource']]
+        );
+
 
         // Parse the items
         if ($objArticle !== null)

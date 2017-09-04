@@ -12,6 +12,7 @@ namespace HeimrichHannot\ContaoDynamicFeedBundle\Component;
 
 use Contao\System;
 use function GuzzleHttp\Promise\queue;
+use HeimrichHannot\Haste\Util\StringUtil;
 
 class NewsFeedGenerator
 {
@@ -73,7 +74,7 @@ class NewsFeedGenerator
         $objChannel = null;
         if ($varId !== 0)
         {
-            $objSource = static::getFeedSource($arrFeed['news_source']);
+            $objSource = static::getFeedSource($arrFeed['df_newsSource']);
             if ($objSource === null) {
                 return null;
             }
@@ -102,8 +103,10 @@ class NewsFeedGenerator
                 $objFeed = System::importStatic($callback[0])->{$callback[1]}($objFeed, $arrFeed, $objChannel);
             }
         }
+
         $strFeed =   $objFeed->generateRss();
-        return \StringUtil::decodeEntities($strFeed);
+
+        return StringUtil::replaceNonXmlEntities($strFeed);
     }
 
     /**

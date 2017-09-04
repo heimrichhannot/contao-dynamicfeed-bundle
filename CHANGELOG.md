@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.1] - 2017-09-04
+
+### Fixed
+* empty feeds
+* always returning same items
+
 ## [1.1.0] - 2017-09-04
 
 ### Added
