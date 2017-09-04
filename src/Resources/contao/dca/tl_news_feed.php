@@ -10,18 +10,17 @@
 
 \Contao\CoreBundle\DataContainer\PaletteManipulator::create()
         ->addLegend('dynamic_feed_legend', 'archives_legend', \Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_AFTER)
-        ->addField('feedGeneration','dynamic_feed_legend',\Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_APPEND)
-        ->addField('news_source','dynamic_feed_legend',\Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_APPEND)
+        ->addField('df_feedType','dynamic_feed_legend',\Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('default','tl_news_feed');
 
 $dc = &$GLOBALS['TL_DCA']['tl_news_feed'];
 
-$dc['__selector__'][] = 'feedGeneration';
-$dc['subpalettes']['feedGeneration_dynamic'] = 'news_source';
-$dc['subpalettes']['feedGeneration_xml'] = '';
+$dc['palettes']['__selector__'][] = 'df_feedType';
+$dc['subpalettes']['df_feedType_dynamic'] = 'df_newsSource';
+$dc['subpalettes']['df_feedType_xml'] = '';
 
 $fields = [
-    'feedGeneration' => [
+    'df_feedType' => [
         'label'     => &$GLOBALS['TL_LANG']['tl_news_feed']['feedGeneration'],
         'default'   => \HeimrichHannot\ContaoDynamicFeedBundle\Component\NewsFeedGenerator::FEEDGENERATION_XML,
         'filter'    => true,
@@ -36,7 +35,7 @@ $fields = [
         ],
         'sql'       => "varchar(32) NOT NULL default '".\HeimrichHannot\ContaoDynamicFeedBundle\Component\NewsFeedGenerator::FEEDGENERATION_XML."'"
     ],
-    'news_source'        => [
+    'df_newsSource'        => [
         'label'            => &$GLOBALS['TL_LANG']['tl_news_feed']['news_source'],
         'exclude'          => true,
         'inputType'        => 'select',
