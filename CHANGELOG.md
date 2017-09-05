@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.3] - 2017-09-05
+
+### Changed
+* removed contao/config folder
+
 ## [1.1.2] - 2017-09-04 
 
 ### Changed
