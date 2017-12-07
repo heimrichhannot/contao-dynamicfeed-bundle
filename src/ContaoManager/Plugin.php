@@ -23,7 +23,7 @@ class Plugin implements BundlePluginInterface, RoutingPluginInterface
     {
         return [
             BundleConfig::create(HeimrichHannotContaoDynamicFeedBundle::class)
-                ->setLoadAfter([ContaoNewsBundle::class])
+                ->setLoadAfter([ContaoNewsBundle::class, 'news_categories'])
         ];
     }
 

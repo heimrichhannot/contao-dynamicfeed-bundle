@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.4] - 2017-12-07
+
+### Added
+* `heimrichhannot/contao-news_categories` support to provide category tree news urls
+
 ## [1.1.3] - 2017-09-05
 
 ### Changed
