@@ -12,14 +12,12 @@
 namespace HeimrichHannot\NewsBundle\Controller;
 
 
-use Haste\Http\Response\XmlResponse;
 use HeimrichHannot\NewsBundle\Component\FeedSourceInterface;
 use HeimrichHannot\NewsBundle\Component\NewsFeedGenerator;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
 
 class NewsFeedController extends Controller
 {

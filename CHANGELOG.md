@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.5] - 2018-11-28
+
+#### Fixed
+- replace `sensio/framework-extra-bundle` route handling in controller with symfony Route annotation
+
 ## [1.1.4] - 2017-12-07
 
 ### Added
@@ -55,3 +60,4 @@
 ###Added
 * decoubled dynamic newsfeed from [contao-news-bundle](https://github.com/heimrichhannot/contao-news-bundle)
 * NewsArchiveFeedSource as example implementation
+
