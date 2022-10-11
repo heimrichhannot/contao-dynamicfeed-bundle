@@ -12,14 +12,15 @@
 namespace HeimrichHannot\NewsBundle\Controller;
 
 
-use HeimrichHannot\NewsBundle\Component\FeedSourceInterface;
-use HeimrichHannot\NewsBundle\Component\NewsFeedGenerator;
+use Contao\NewsFeedModel;
+use HeimrichHannot\ContaoDynamicFeedBundle\Component\FeedSourceInterface;
+use HeimrichHannot\ContaoDynamicFeedBundle\Component\NewsFeedGenerator;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class NewsFeedController extends Controller
+class NewsFeedController extends AbstractController
 {
     /**
      * @param $alias
@@ -39,7 +40,7 @@ class NewsFeedController extends Controller
     {
         $this->container->get('contao.framework')->initialize();
 
-        $objFeed = \NewsFeedModel::findByIdOrAlias($alias);
+        $objFeed = NewsFeedModel::findByIdOrAlias($alias);
         if ($objFeed === null)
         {
             throw $this->createNotFoundException('The rss feed you try to access does not exist.');
@@ -81,7 +82,7 @@ class NewsFeedController extends Controller
     {
         $this->container->get('contao.framework')->initialize();
 
-        $objFeed = \NewsFeedModel::findByIdOrAlias($alias);
+        $objFeed = NewsFeedModel::findByIdOrAlias($alias);
         if (!$objFeed || $objFeed->df_feedType != 'dynamic')
         {
             throw $this->createNotFoundException('The rss feed you try to access does not exist.');

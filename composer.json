@@ -2,18 +2,11 @@
     "name": "heimrichhannot/contao-dynamicfeed-bundle",
     "type": "contao-bundle",
     "description": "Contao 4 dynamic feed bundle",
-    "license": "LGPL-3.0+",
+    "license": "LGPL-3.0-or-later",
     "require": {
-        "php": "~7.0",
+        "php": "~7.0 || ^8.0",
         "contao/core-bundle": "~4.4",
-        "contao-community-alliance/composer-plugin": "~2.4 || ~3.0"
-    },
-    "require-dev": {
-        "contao/manager-plugin": "^2.0",
-        "friendsofphp/php-cs-fixer": "^2.0",
-        "phpunit/phpunit": "^4.5",
-        "satooshi/php-coveralls": "^1.0",
-        "symfony/phpunit-bridge": "^2.8|^3.0"
+        "symfony/routing": "^4.4 || ^5.4"
     },
     "autoload": {
         "psr-4": {
@@ -28,9 +21,6 @@
             "src/Resources/contao/languages/",
             "src/Resources/contao/templates/"
         ]
-    },
-    "config": {
-        "preferred-install": "dist"
     },
     "extra": {
         "contao-manager-plugin": "HeimrichHannot\\ContaoDynamicFeedBundle\\ContaoManager\\Plugin"

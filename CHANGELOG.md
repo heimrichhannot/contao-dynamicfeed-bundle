@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.0] - 2022-10-11
+- Fixed: compatibility with contao 4.13 and symfony 5
+- Fixed: missing license file
+- Fixed: used outdated license 
+
 ## [1.1.5] - 2018-11-28
 
 #### Fixed
