@@ -4,8 +4,8 @@
     "description": "Contao 4 dynamic feed bundle",
     "license": "LGPL-3.0-or-later",
     "require": {
-        "php": "~7.0 || ^8.0",
-        "contao/core-bundle": "~4.4",
+        "php": "~7.4 || ^8.0",
+        "contao/core-bundle": "~4.9",
         "symfony/routing": "^4.4 || ^5.4"
     },
     "autoload": {

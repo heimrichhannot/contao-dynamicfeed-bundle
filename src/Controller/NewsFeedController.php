@@ -9,9 +9,10 @@
  */
 
 
-namespace HeimrichHannot\NewsBundle\Controller;
+namespace HeimrichHannot\ContaoDynamicFeedBundle\Controller;
 
 
+use Contao\CoreBundle\Framework\ContaoFramework;
 use Contao\NewsFeedModel;
 use HeimrichHannot\ContaoDynamicFeedBundle\Component\FeedSourceInterface;
 use HeimrichHannot\ContaoDynamicFeedBundle\Component\NewsFeedGenerator;
@@ -22,6 +23,16 @@ use Symfony\Component\HttpFoundation\Response;
 
 class NewsFeedController extends AbstractController
 {
+    private ContaoFramework   $contaoFramework;
+    private NewsFeedGenerator $feedGenerator;
+
+    public function __construct(ContaoFramework $contaoFramework, NewsFeedGenerator $feedGenerator)
+    {
+        $this->contaoFramework = $contaoFramework;
+        $this->feedGenerator = $feedGenerator;
+    }
+
+
     /**
      * @param $alias
      *
@@ -38,7 +49,7 @@ class NewsFeedController extends AbstractController
      */
     public function dynamicFeedByAliasChannels($alias, $_format)
     {
-        $this->container->get('contao.framework')->initialize();
+        $this->contaoFramework->initialize();
 
         $objFeed = NewsFeedModel::findByIdOrAlias($alias);
         if ($objFeed === null)
@@ -48,7 +59,7 @@ class NewsFeedController extends AbstractController
         /**
          * @var FeedSourceInterface $objSource
          */
-        $objSource = $this->container->get('hh.dynamicfeed.feed_generator')->getFeedSource($objFeed->df_newsSource);
+        $objSource = $this->feedGenerator->getFeedSource($objFeed->df_newsSource);
         $objChannels = $objSource->getChannels();
         $arrChannels = [];
         while ($objChannels->next())
@@ -80,7 +91,7 @@ class NewsFeedController extends AbstractController
      */
     public function dynamicFeedByAliasAction($alias)
     {
-        $this->container->get('contao.framework')->initialize();
+        $this->contaoFramework->initialize();
 
         $objFeed = NewsFeedModel::findByIdOrAlias($alias);
         if (!$objFeed || $objFeed->df_feedType != 'dynamic')
@@ -89,7 +100,7 @@ class NewsFeedController extends AbstractController
         }
         $objFeed->feedName = $objFeed->alias ?: 'news' . $objFeed->id;
 
-        $strFeed = $this->container->get('hh.dynamicfeed.feed_generator')->generateFeed($objFeed->row());
+        $strFeed = $this->feedGenerator->generateFeed($objFeed->row());
         return new Response($strFeed);
     }
 
@@ -105,11 +116,11 @@ class NewsFeedController extends AbstractController
      * @Route("/share/{alias}/{id}.{_format}/{count}", defaults={"_format"="xml"})
      * @Route("/share/{alias}/{id}", defaults={"_format"="xml"})
      */
-    public function dynamicFeedByAliasAndIdAction($alias, $id, $count = 0)
+    public function dynamicFeedByAliasAndIdAction($alias, $id, int $count = 0)
     {
-        $this->container->get('contao.framework')->initialize();
+        $this->contaoFramework->initialize();
 
-        $objFeed = \NewsFeedModel::findByIdOrAlias($alias);
+        $objFeed = NewsFeedModel::findByIdOrAlias($alias);
         if ($objFeed === null)
         {
             throw $this->createNotFoundException('The rss feed you try to access does not exist.');
@@ -119,15 +130,8 @@ class NewsFeedController extends AbstractController
         {
             $id = intval($id);
         }
-        /**
-         * @var NewsFeedGenerator $objNewsGenerator
-         */
-        $objNewsGenerator = $this->container->get('hh.dynamicfeed.feed_generator');
-        if (is_numeric($count))
-        {
-            $objNewsGenerator->setMaxItems(intval($count));
-        }
-        $strFeed = $objNewsGenerator->generateFeed($objFeed->row(), $id);
+
+        $strFeed = $this->feedGenerator->generateFeed($objFeed->row(), $id, ['']);
         return new Response($strFeed);
     }
 }

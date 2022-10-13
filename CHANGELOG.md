@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.1] - 2022-10-13
+- Changed: raised dependencies
+- Fixed: issues with contao 4.13
+- Deprecated: NewsFeedGenerator::setMaxItems() and NewsFeedGenerator::getMaxItems()
+
 ## [1.2.0] - 2022-10-11
 - Fixed: compatibility with contao 4.13 and symfony 5
 - Fixed: missing license file

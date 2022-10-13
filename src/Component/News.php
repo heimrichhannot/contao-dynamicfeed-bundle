@@ -11,6 +11,13 @@
 
 namespace HeimrichHannot\ContaoDynamicFeedBundle\Component;
 
+use Contao\BackendUser;
+use Contao\Config;
+use Contao\Environment;
+use Contao\Feed;
+use Contao\FeedItem;
+use Contao\PageModel;
+use Contao\StringUtil;
 use HeimrichHannot\ContaoDynamicFeedBundle\Models\NewsModel;
 
 class News extends \Contao\News
@@ -19,20 +26,20 @@ class News extends \Contao\News
      * @param array $arrFeed
      * @param string|int $varId ID or unique alias
      *
-     * @return \Feed|null
+     * @return Feed|null
      */
     public function generateDynamicFeed($arrFeed, $varId = 0)
     {
-        $arrArchives = \StringUtil::deserialize($arrFeed['archives']);
+        $arrArchives = StringUtil::deserialize($arrFeed['archives']);
         if (!is_array($arrArchives) || empty($arrArchives)) {
             return null;
         }
         $strType = ($arrFeed['format'] == 'atom') ? 'generateAtom' : 'generateRss';
-        $strLink = $arrFeed['feedBase'] ?: \Environment::get('url');
+        $strLink = $arrFeed['feedBase'] ?: Environment::get('url');
         $strFile = $arrFeed['feedName'];
         $bundles = \System::getContainer()->getParameter('kernel.bundles');
 
-        $objFeed              = new \Feed($strFile);
+        $objFeed              = new Feed($strFile);
         $objFeed->link        = $strLink;
         $objFeed->title       = $arrFeed['title'];
         $objFeed->description = $arrFeed['description'];
@@ -64,12 +71,12 @@ class News extends \Contao\News
                 }
                 // Get the jumpTo URL
                 if (!isset($arrUrls[$jumpTo])) {
-                    $objParent = \PageModel::findWithDetails($jumpTo);
+                    $objParent = PageModel::findWithDetails($jumpTo);
                     // A jumpTo page is set but does no longer exist (see #5781)
                     if ($objParent === null) {
                         $arrUrls[$jumpTo] = false;
                     } else {
-                        $arrUrls[$jumpTo] = $objParent->getAbsoluteUrl(\Config::get('useAutoItem') ? '/%s' : '/items/%s');
+                        $arrUrls[$jumpTo] = $objParent->getAbsoluteUrl(Config::get('useAutoItem') ? '/%s' : '/items/%s');
                     }
                 }
                 // Skip the event if it requires a jumpTo URL but there is none
@@ -77,7 +84,7 @@ class News extends \Contao\News
                     continue;
                 }
                 $strUrl         = $arrUrls[$jumpTo];
-                $objItem        = new \FeedItem();
+                $objItem        = new FeedItem();
                 $objItem->title = $objArticle->headline;
                 if (isset($bundles['news_categories'])) {
                     $objItem->link = \NewsCategories\CategoryHelper::getCategoryNewsUrl($objArticle);

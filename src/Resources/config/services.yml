@@ -1,7 +1,15 @@
 services:
-#hh.news-bundle.news_feed_generator:
+    HeimrichHannot\ContaoDynamicFeedBundle\:
+        resource: '../../{Controller}/*'
+        autowire: true
+        autoconfigure: true
+
+    HeimrichHannot\ContaoDynamicFeedBundle\Component\NewsFeedGenerator:
+        autowire: true
+
     hh.dynamicfeed.feed_generator:
-        class: HeimrichHannot\ContaoDynamicFeedBundle\Component\NewsFeedGenerator
+        alias: HeimrichHannot\ContaoDynamicFeedBundle\Component\NewsFeedGenerator
+        public: true
 
     hh.dynamicfeed.source.newsarchive:
         class: HeimrichHannot\ContaoDynamicFeedBundle\Components\NewsArchiveFeedSource

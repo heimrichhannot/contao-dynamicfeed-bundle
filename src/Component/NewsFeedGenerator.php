@@ -66,11 +66,18 @@ class NewsFeedGenerator
     /**
      * @param array $arrFeed
      * @param string|int $varId Id oder unique alias of news source
+     * @param array $options Pass additional options
      *
+     * Options:
+     * - maxItems: (int) Max number of items
      * @return string|null
      */
-    public function generateFeed($arrFeed, $varId=0)
+    public function generateFeed($arrFeed, $varId=0, array $options = [])
     {
+        $options = array_merge([
+            'maxItems' => $this->maxItems,
+        ], $options);
+
         $objChannel = null;
         if ($varId !== 0)
         {
@@ -88,9 +95,9 @@ class NewsFeedGenerator
                 $arrFeed['title'] = str_replace($strLabel, $strTitle, $arrFeed['title']);
             }
         }
-        if ($this->maxItems > 0)
+        if ($options['maxItems'] > 0)
         {
-            $arrFeed['maxItems'] = $this->maxItems;
+            $arrFeed['maxItems'] = $options['maxItems'];
         }
 
         $news = new News();
@@ -111,6 +118,8 @@ class NewsFeedGenerator
 
     /**
      * @return int
+     *
+     * @deprecated
      */
     public function getMaxItems(): int
     {
@@ -119,6 +128,8 @@ class NewsFeedGenerator
 
     /**
      * @param int $maxItems
+     *
+     * @deprecated Use option parameter of generateFeed()
      */
     public function setMaxItems(int $maxItems)
     {
