@@ -100,7 +100,7 @@ class NewsFeedController extends AbstractController
         }
         $objFeed->feedName = $objFeed->alias ?: 'news' . $objFeed->id;
 
-        $strFeed = $this->feedGenerator->generateFeed($objFeed->row());
+        $strFeed = $this->feedGenerator->generateFeed($objFeed->row(), 0, [''], $_GET['sort'] ? $_GET['sort'].' DESC' : 'date DESC');
         return new Response($strFeed);
     }
 
@@ -131,7 +131,7 @@ class NewsFeedController extends AbstractController
             $id = intval($id);
         }
 
-        $strFeed = $this->feedGenerator->generateFeed($objFeed->row(), $id, [''], $_GET['sort'].' DESC' ?? 'date DESC');
+        $strFeed = $this->feedGenerator->generateFeed($objFeed->row(), $id, [''], $_GET['sort'] ? $_GET['sort'].' DESC' : 'date DESC');
         return new Response($strFeed);
     }
 }

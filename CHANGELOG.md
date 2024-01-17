@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.3.1] - 2024-01-17
+- Fixed+Added: support sorting for alias action controller
+
 ## [1.3.0] - 2024-01-17
 - Added: support sorting for alias feed controller
 
