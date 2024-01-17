@@ -131,7 +131,7 @@ class NewsFeedController extends AbstractController
             $id = intval($id);
         }
 
-        $strFeed = $this->feedGenerator->generateFeed($objFeed->row(), $id, ['']);
+        $strFeed = $this->feedGenerator->generateFeed($objFeed->row(), $id, [''], $_GET['sort'].' DESC' ?? 'date DESC');
         return new Response($strFeed);
     }
 }

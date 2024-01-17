@@ -28,7 +28,7 @@ class News extends \Contao\News
      *
      * @return Feed|null
      */
-    public function generateDynamicFeed($arrFeed, $varId = 0)
+    public function generateDynamicFeed($arrFeed, $varId = 0, $order = 'date DESC')
     {
         $arrArchives = StringUtil::deserialize($arrFeed['archives']);
         if (!is_array($arrArchives) || empty($arrArchives)) {
@@ -56,7 +56,10 @@ class News extends \Contao\News
             $arrArchives,
             $arrFeed['maxItems'],
             0,
-            ['df_newsSource' => $arrFeed['df_newsSource']]
+            [
+                'df_newsSource' => $arrFeed['df_newsSource'],
+                'order' => $order
+            ]
         );
 
 
@@ -91,7 +94,13 @@ class News extends \Contao\News
                 } else {
                     $objItem->link = $this->getLink($objArticle, $strUrl);
                 }
-                $objItem->published = $objArticle->date;
+
+                if(str_contains($order,'tstamp')){
+                    $objItem->published = $objArticle->tstamp;
+                } else {
+                    $objItem->published = $objArticle->date;
+                }
+
                 /** @var BackendUser $objAuthor */
                 if (($objAuthor = $objArticle->getRelated('author')) !== null) {
                     $objItem->author = $objAuthor->name;

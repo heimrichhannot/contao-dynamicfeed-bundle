@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.3.0] - 2024-01-17
+- Added: support sorting for alias feed controller
+
 ## [1.2.1] - 2022-10-13
 - Changed: raised dependencies
 - Fixed: issues with contao 4.13

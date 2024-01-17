@@ -72,7 +72,7 @@ class NewsFeedGenerator
      * - maxItems: (int) Max number of items
      * @return string|null
      */
-    public function generateFeed($arrFeed, $varId=0, array $options = [])
+    public function generateFeed($arrFeed, $varId=0, array $options = [], $order = 'date DESC')
     {
         $options = array_merge([
             'maxItems' => $this->maxItems,
@@ -101,7 +101,7 @@ class NewsFeedGenerator
         }
 
         $news = new News();
-        $objFeed = $news->generateDynamicFeed($arrFeed, $varId);
+        $objFeed = $news->generateDynamicFeed($arrFeed, $varId, $order);
         if (isset($GLOBALS['TL_HOOKS']['dynamicfeedBeforeGeneration'])
             && is_array($GLOBALS['TL_HOOKS']['dynamicfeedBeforeGeneration']))
         {
