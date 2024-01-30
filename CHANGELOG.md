@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.3.2] - 2024-01-30
+- Fixed: php8 warnings
+
 ## [1.3.1] - 2024-01-17
 - Fixed+Added: support sorting for alias action controller
 

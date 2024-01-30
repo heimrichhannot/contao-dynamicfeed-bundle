@@ -26,8 +26,8 @@ $fields = [
         'filter'    => true,
         'inputType' => 'select',
         'options'   => [
-            'xml' => $GLOBALS['TL_LANG']['tl_news_feed']['feedGeneration_xml'],
-            'dynamic' => $GLOBALS['TL_LANG']['tl_news_feed']['feedGeneration_dynamic'],
+            'xml' => &$GLOBALS['TL_LANG']['tl_news_feed']['feedGeneration_xml'],
+            'dynamic' => &$GLOBALS['TL_LANG']['tl_news_feed']['feedGeneration_dynamic'],
         ],
         'eval'      => [
             'tl_class' => 'w50',
